@@ -55,7 +55,6 @@ export const Comments = ({ gradebook }) => {
     }
   }, [posted]);
 
-  console.log(posted);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -75,20 +74,24 @@ export const Comments = ({ gradebook }) => {
   return (
     <div>
       {gradebook.comments && (
-        <div>
-          <p>Comments:</p>
+        <div style={{ paddingTop: "30px" }}>
+          <p className="h6">Comments:</p>
           {gradebook.comments.length < 1 ? (
             <p>No comments</p>
           ) : (
             <ol>
               {gradebook.comments.map((comment) => (
-                <div key={comment.id}>
+                <div className="card p-3" key={comment.id}>
                   <h6>
                     Author: {comment.first_name} {comment.last_name}
                   </h6>
                   <li>{comment.content}</li>
-                  <button onClick={() => handleDelete(comment.id)}>
-                    Delete
+                  <button
+                    style={{ maxWidth: "180px", margin: "0 auto 10px" }}
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(comment.id)}
+                  >
+                    Remove comment
                   </button>
                 </div>
               ))}
@@ -98,25 +101,29 @@ export const Comments = ({ gradebook }) => {
       )}
 
       <h5>Add comment</h5>
-      <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
-        <label>
-          Your comment:
-          <textarea
-            rows={4}
-            cols={40}
-            name="content"
-            value={newComment.content}
-            placeholder="Your comment"
-            onChange={({ target }) =>
-              setNewComment({ ...newComment, content: target.value })
-            }
-          />
-        </label>
+      <form
+        className="d-flex"
+        onSubmit={handleSubmit}
+        style={{ marginBottom: "20px" }}
+      >
+        <label className="form-control-label me-2">Your comment:</label>
+        <textarea
+          className="form-control me-2"
+          rows={4}
+          cols={40}
+          name="content"
+          value={newComment.content}
+          placeholder="Your comment"
+          onChange={({ target }) =>
+            setNewComment({ ...newComment, content: target.value })
+          }
+        />
+
         {errors && errors.content && errors.content.length && (
           <span style={{ color: "red" }}>{errors.content[0]}</span>
         )}
 
-        <button>Submit</button>
+        <button className="btn btn-outline-success">Submit</button>
       </form>
     </div>
   );

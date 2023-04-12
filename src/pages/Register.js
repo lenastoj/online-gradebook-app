@@ -42,116 +42,138 @@ export const Register = () => {
   }
 
   return (
-    <div
-      style={{
-        margin: "auto",
-        width: "auto",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <h2>Register</h2>
-      <form
-        style={{ display: "flex", flexDirection: "column", width: 300 }}
-        onSubmit={handleSubmit}
-      >
-        <label>
-          First name
+    <div className="container card p-3 mb-3" style={{ maxWidth: "600px" }}>
+      <h2 className="my-0 mr-md-auto font-weight-normal pb-3">Register</h2>
+      <form className="p-20" onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label" for="first_name">
+            First name
+          </label>
           <input
+            className="form-control"
+            id="first_name"
             name="first_name"
             value={userData.first_name}
             placeholder="First name"
             type="text"
             onChange={handleChange}
           />
-        </label>
-        {errors && errors.first_name && errors.first_name.length && (
-          <span style={{ color: "red" }}>{errors.first_name[0]}</span>
-        )}
+          {errors && errors.first_name && errors.first_name.length && (
+            <span style={{ color: "red" }}>{errors.first_name[0]}</span>
+          )}
+        </div>
 
-        <label>
-          Last name
+        <div className="mb-3">
+          <label className="form-label" for="last_name">
+            Last name
+          </label>
           <input
+            className="form-control"
+            id="last_name"
             name="last_name"
             type="text"
             value={userData.last_name}
             placeholder="Last name"
             onChange={handleChange}
           />
-        </label>
-        {errors && errors.last_name && errors.last_name.length && (
-          <span style={{ color: "red" }}>{errors.last_name[0]}</span>
-        )}
 
-        <label>
-          Image url
+          {errors && errors.last_name && errors.last_name.length && (
+            <span style={{ color: "red" }}>{errors.last_name[0]}</span>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" for="image_url">
+            Image url
+          </label>
           <input
+            className="form-control"
+            id="image_url"
             name="image_url"
             type="text"
             value={userData.image_url}
             placeholder="Image url"
             onChange={handleChange}
           />
-        </label>
-        {errors && errors.image_url && errors.image_url.length && (
-          <span style={{ color: "red" }}>{errors.image_url[0]}</span>
-        )}
 
-        <label>
-          Email
+          {errors && errors.image_url && errors.image_url.length && (
+            <span style={{ color: "red" }}>{errors.image_url[0]}</span>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" for="email">
+            Email
+          </label>
           <input
+            className="form-control"
+            id="email"
             name="email"
             value={userData.email}
             type="text"
             placeholder="Email"
             onChange={handleChange}
           />
-        </label>
-        {errors && errors.email && errors.email.length && (
-          <span style={{ color: "red" }}>{errors.email[0]}</span>
-        )}
 
-        <label>
-          Password
+          {errors && errors.email && errors.email.length && (
+            <span style={{ color: "red" }}>{errors.email[0]}</span>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" for="password">
+            Password
+          </label>
           <input
+            className="form-control"
+            id="password"
             name="password"
             value={userData.password}
             type="password"
             placeholder="Password"
             onChange={handleChange}
           />
-        </label>
 
-        {errors && errors.password && errors.password.length && (
-          <span style={{ color: "red" }}>{errors.password[0]}</span>
-        )}
+          {errors && errors.password && errors.password.length && (
+            <span style={{ color: "red" }}>{errors.password[0]}</span>
+          )}
+        </div>
 
-        <label>
-          Confirm password
+        <div className="mb-3">
+          <label className="form-label" for="password_confirmation">
+            Confirm password
+          </label>
           <input
+            className="form-control"
+            id="password_confirmation"
             name="password_confirmation"
             value={userData.password_confirmation}
             type="password"
             placeholder="Confirm password"
             onChange={handleChange}
           />
-        </label>
+        </div>
 
-        <label>
-          Accepted terms and conditions
+        <div className="mb-3 form-group form-check">
+          <label className="form-check-label" for="accept">
+            Accepted terms and conditions
+          </label>
           <input
+            className="form-check-input"
+            id="accept"
             type="checkbox"
             name="accept"
             onChange={handleChecked}
             checked={userData.accept}
           />
-        </label>
-        {errors && errors.accept && errors.accept.length && (
-          <span style={{ color: "red" }}>{errors.accept[0]}</span>
-        )}
+          {errors && errors.accept && errors.accept.length && (
+            <span style={{ color: "red", display: "block" }}>
+              {errors.accept[0]}
+            </span>
+          )}
+        </div>
 
-        <button>Register</button>
+        <button className="btn btn-primary">Register</button>
       </form>
     </div>
   );

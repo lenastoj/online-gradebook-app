@@ -41,16 +41,16 @@ export const MyGradebook = () => {
   }
 
   return (
-    <div>
+    <div className="jumbotron container">
       <h2>My Gradebook Page</h2>
 
       {activeUser && (
-        <p>
+        <p className="h4">
           Professor: {activeUser.first_name} {activeUser.last_name}
         </p>
       )}
       {gradebook && (
-        <h4>
+        <h4 style={{ marginBottom: "15px" }} className="h4">
           {gradebook.name
             ? `Gradebook: ${gradebook.name}`
             : `You currently do not have Gradebook`}
@@ -58,9 +58,12 @@ export const MyGradebook = () => {
       )}
 
       {gradebook && (
-        <div>
+        <div style={{ marginBottom: "15px" }}>
           {gradebook.students && (
-            <Link to={`/gradebooks/${gradebook.id}/students/create`}>
+            <Link
+              className="btn btn-outline-success"
+              to={`/gradebooks/${gradebook.id}/students/create`}
+            >
               Add New Student
             </Link>
           )}
@@ -69,14 +72,31 @@ export const MyGradebook = () => {
 
       {gradebook.name && (
         <div>
-          <p>Students:</p>
+          <p className="h5">Students:</p>
 
           {studentsLength < 1 ? (
-            <p>No students in this class</p>
+            <p
+              className="card"
+              style={{
+                padding: "15px",
+                maxWidth: "400px",
+                margin: " 0 auto",
+              }}
+            >
+              No students in this class
+            </p>
           ) : (
             <ol>
               {gradebook.students.map((student, index) => (
-                <li key={index}>
+                <li
+                  style={{
+                    padding: "15px",
+                    maxWidth: "400px",
+                    margin: " 0 auto",
+                  }}
+                  className="card"
+                  key={index}
+                >
                   {student.first_name} {student.last_name}
                 </li>
               ))}
@@ -88,9 +108,20 @@ export const MyGradebook = () => {
       {gradebook && (
         <div>
           {gradebook.id && (
-            <div>
-              <Link to={`/gradebooks/${gradebook.id}/edit`}>Edit</Link>
-              <button onClick={() => handleDelete(gradebook.id)}>Delete</button>
+            <div style={{ paddingTop: "20px" }}>
+              <Link
+                style={{ marginRight: "20px" }}
+                className="btn btn-warning"
+                to={`/gradebooks/${gradebook.id}/edit`}
+              >
+                Edit gradebook
+              </Link>
+              <button
+                className="btn btn-danger"
+                onClick={() => handleDelete(gradebook.id)}
+              >
+                Delete gradebook
+              </button>
             </div>
           )}
         </div>

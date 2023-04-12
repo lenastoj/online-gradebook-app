@@ -17,7 +17,6 @@ export const Gradebooks = () => {
 
   const activeUser = useSelector(selectActiveUser);
 
-  ///////////////////////////////////////////////filtriranje 2 varijante
   const [searchTerms, setSearchTerms] = useState({
     name: "",
   });
@@ -25,10 +24,7 @@ export const Gradebooks = () => {
     e.preventDefault();
     dispatch(setFilters(searchTerms));
   };
-  // useEffect(() => {
-  //   dispatch(setFilters(searchTerms));
-  // }, [searchTerms]);
-  ///////////////////////////////////////////////filtriranje 2 varijante
+
   useEffect(() => {
     dispatch(getGradebooks(page));
   }, []);
@@ -42,33 +38,45 @@ export const Gradebooks = () => {
   }
 
   return (
-    <div>
-      <h2>Home Page - All Gradebooks</h2>
-      <div>
-        {/* <form> */}
-        <form onClick={handleFilter}>
-          <label>
-            Search gradebooks:
-            <input
-              type="text"
-              value={searchTerms.name}
-              placeholder="Gradebook name"
-              onChange={({ target }) =>
-                setSearchTerms({ ...searchTerms, name: target.value })
-              }
-            />
-          </label>
-          <button>Filter</button>
+    <div className="container">
+      <h2 className="my-0 mr-md-auto font-weight-normal pb-3">
+        Home Page - All Gradebooks
+      </h2>
+      <div
+        style={{
+          margin: "0 auto",
+          maxWidth: "500px",
+        }}
+      >
+        <form className="d-flex" onClick={handleFilter}>
+          <label className="form-control-label me-2">Search gradebooks:</label>
+          <input
+            className="form-control me-2"
+            type="text"
+            value={searchTerms.name}
+            placeholder="Gradebook name"
+            onChange={({ target }) =>
+              setSearchTerms({ ...searchTerms, name: target.value })
+            }
+          />
+
+          <button className="btn btn-outline-success">Filter</button>
         </form>
       </div>
       {gradebooks.data.length > 0 && (
-        <div>
-          <ol>
+        <div className="container p-4">
+          <ul style={{ paddingLeft: "0" }}>
             {gradebooks.data.map((gradebook, index) => (
-              <li key={index}>
-                <hr />
-                <h4>
-                  <Link to={`/gradebooks/${gradebook.id}`}>
+              <li
+                className="card bg-light p-3 mb-3 shadow p-3 mb-5 rounded"
+                key={index}
+              >
+                {/* <hr /> */}
+                <h4 className="my-0 mr-md-auto font-weight-bold pb-3">
+                  <Link
+                    className="link-primary text-dark card-title text-decoration-none"
+                    to={`/gradebooks/${gradebook.id}`}
+                  >
                     {gradebook.name}
                   </Link>
                 </h4>
@@ -85,9 +93,10 @@ export const Gradebooks = () => {
                 <p>Created at: {useFormattedDate(gradebook.created_at)}</p>
               </li>
             ))}
-          </ol>
+          </ul>
           {gradebooks.current_page !== gradebooks.last_page && (
             <button
+              className="btn btn-outline-success"
               onClick={handleLoadMore}
               disabled={gradebooks.current_page == gradebooks.last_page}
               style={{ marginBottom: "40px" }}

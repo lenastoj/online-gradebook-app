@@ -1,3 +1,14 @@
+## How to initialize project
+
+1. npm install
+2. npm install react-router-dom@5.3
+3. npm install axios
+4. npm install @reduxjs/toolkit react-redux
+5. npm install redux-saga
+6. npm install date-fns --save
+
+\*7. npm install bootstrap
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

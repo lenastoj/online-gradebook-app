@@ -16,55 +16,65 @@ export const Professors = () => {
     dispatch(getProfessors());
   }, []);
 
-  /////////////////////////////////////////////////////filtriranje 2 varijante
   const [searchTerms, setSearchTerms] = useState({
     name: "",
   });
-  const handleFilter = async (e) => {
-    e.preventDefault();
+
+  useEffect(() => {
     dispatch(setFiltersProfessor(searchTerms));
-  };
-  // useEffect(() => {
-  //   dispatch(setFilters(searchTerms));
-  // }, [searchTerms]);
-  /////////////////////////////////////////////////////filtriranje 2 varijante
+  }, [searchTerms]);
 
   return (
-    <div>
-      <h2>All Professors Page</h2>
-      <div>
-        {/* <form> */}
-        <form onClick={handleFilter}>
-          <label>
-            Search gradebooks:
-            <input
-              type="text"
-              value={searchTerms.name}
-              placeholder="Professor name"
-              onChange={({ target }) =>
-                setSearchTerms({ ...searchTerms, name: target.value })
-              }
-            />
+    <div className="container">
+      <h2 className="my-0 mr-md-auto font-weight-normal pb-3">
+        All Professors Page
+      </h2>
+      <div
+        style={{
+          margin: "0 auto 15px",
+          maxWidth: "500px",
+        }}
+      >
+        <form className="d-flex">
+          <label className="form-control-label me-2">
+            Start typing (it's interactive):
           </label>
-          <button>Filter</button>
+          <input
+            className="form-control me-2"
+            type="text"
+            value={searchTerms.name}
+            placeholder="Professor name"
+            onChange={({ target }) =>
+              setSearchTerms({ ...searchTerms, name: target.value })
+            }
+          />
         </form>
       </div>
       {professors.length > 0 && (
-        <div>
-          <ol>
+        <div container p-4>
+          <ul
+            className="d-flex flex-wrap"
+            style={{ paddingLeft: "0", justifyContent: "center" }}
+          >
             {professors.map((professor, index) => (
-              <li key={index}>
-                <hr />
+              <li
+                style={{ minWidth: "32%", margin: "5px" }}
+                className="card d-flex flex-column align-items-center bg-light p-3 mb-3 shadow p-3 mb-5 rounded"
+                key={index}
+              >
                 {professor.image_url && (
                   <img
                     src={professor.image_url}
-                    style={{ width: 150, height: "auto" }}
+                    style={{ width: 200, height: "auto", marginBottom: "15px" }}
                     alt={`Professor ${professor.first_name} ${professor.last_name}`}
                   />
                 )}
 
-                <h4>
-                  <Link to={`/teachers/${professor.id}`}>
+                <h4 className="my-0 mr-md-auto font-weight-bold pb-3">
+                  <Link
+                    className="link-primary text-dark card-title text-decoration-none"
+                    to={`/teachers/${professor.id}`}
+                  >
                     {professor.first_name} {professor.last_name}
                   </Link>
                 </h4>
@@ -79,7 +89,7 @@ export const Professors = () => {
                 </p>
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       )}
     </div>
