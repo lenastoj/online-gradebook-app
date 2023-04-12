@@ -79,7 +79,7 @@ export const Comments = ({ gradebook }) => {
           {gradebook.comments.length < 1 ? (
             <p>No comments</p>
           ) : (
-            <ol>
+            <ol className="list-unstyled">
               {gradebook.comments.map((comment) => (
                 <div className="card p-3" key={comment.id}>
                   <h6>
@@ -104,10 +104,12 @@ export const Comments = ({ gradebook }) => {
       <form
         className="d-flex"
         onSubmit={handleSubmit}
-        style={{ marginBottom: "20px" }}
+        style={{ marginBottom: "20px", justifyContent:"center", margin: "0 auto"}}
       >
-        <label className="form-control-label me-2">Your comment:</label>
+        <div class="mb-3">
+        <label className="form-control-label me-2" for="content">Your comment:</label>
         <textarea
+        id="content"
           className="form-control me-2"
           rows={4}
           cols={40}
@@ -124,6 +126,7 @@ export const Comments = ({ gradebook }) => {
         )}
 
         <button className="btn btn-outline-success">Submit</button>
+        </div>
       </form>
     </div>
   );

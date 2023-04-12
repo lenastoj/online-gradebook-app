@@ -43,7 +43,7 @@ export const MyGradebook = () => {
   return (
     <div className="jumbotron container">
       <h2>My Gradebook Page</h2>
-
+      <hr />
       {activeUser && (
         <p className="h4">
           Professor: {activeUser.first_name} {activeUser.last_name}
@@ -126,6 +126,7 @@ export const MyGradebook = () => {
           )}
         </div>
       )}
+      <hr />
 
       {gradebook.comments && <Comments gradebook={gradebook} />}
     </div>

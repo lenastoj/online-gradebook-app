@@ -41,20 +41,21 @@ export const ViewGradebook = () => {
   return (
     <div>
       <h2>View Gradebook Page</h2>
-
+    <hr />
       {gradebook && (
-        <p>
+        <p className="h4">
           {gradebook.user
             ? `Teacher: ${gradebook.user.first_name} ${gradebook.user.last_name}`
             : `Teacher: No teacher assigned`}
         </p>
       )}
-      <h3>{gradebook.name}</h3>
+      <h4 style={{ marginBottom: "15px" }} className="h4">{gradebook.name}</h4>
 
       {activeUser && (
         <div>
           {activeUser.id == gradebook.user_id && (
-            <Link to={`/gradebooks/${gradebook.id}/students/create`}>
+            <Link to={`/gradebooks/${gradebook.id}/students/create`} className="btn btn-outline-success"
+            >
               Add New Student
             </Link>
           )}
@@ -63,13 +64,24 @@ export const ViewGradebook = () => {
 
       {gradebook.name && (
         <div>
-          <p>Students:</p>
+          <p className="h5">Students:</p>
+
           {studentsLength < 1 ? (
-            <p>No students in this class</p>
+            <p className="card"
+            style={{
+              padding: "15px",
+              maxWidth: "400px",
+              margin: " 0 auto",
+            }}>No students in this class</p>
           ) : (
             <ol>
               {gradebook.students.map((student, index) => (
-                <li key={index}>
+                <li key={index}     style={{
+                  padding: "15px",
+                  maxWidth: "400px",
+                  margin: " 0 auto",
+                }}
+                className="card">
                   {student.first_name} {student.last_name}
                 </li>
               ))}
@@ -82,13 +94,15 @@ export const ViewGradebook = () => {
         <div>
           {activeUser.id == gradebook.user_id && (
             <div>
-              <Link to={`/gradebooks/${gradebook.id}/edit`}>Edit</Link>
-              <button onClick={() => handleDelete(gradebook.id)}>Delete</button>
+              <Link to={`/gradebooks/${gradebook.id}/edit`} style={{ marginRight: "20px" }}
+                className="btn btn-warning">Edit gradebook</Link>
+              <button onClick={() => handleDelete(gradebook.id)}                 className="btn btn-danger"
+>Delete gradebook</button>
             </div>
           )}
         </div>
       )}
-
+      <hr />
       {gradebook.comments && <Comments gradebook={gradebook} />}
     </div>
   );
